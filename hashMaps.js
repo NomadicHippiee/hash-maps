@@ -142,24 +142,34 @@ class HashMap {
     }
 
     if (this.buckets[index].key === key) {
-        this.buckets[index] = this.buckets[index].next;
-        this.size = this.size -1;
-        return true;
+      this.buckets[index] = this.buckets[index].next;
+      this.size = this.size - 1;
+      return true;
     }
 
     let currentNode = this.buckets[index];
 
     while (currentNode.next !== null) {
-        if (currentNode.next.key === key) {
-            currentNode.next = currentNode.next.next;
-            this.size = this.size - 1;
-            return true;
-        }
+      if (currentNode.next.key === key) {
+        currentNode.next = currentNode.next.next;
+        this.size = this.size - 1;
+        return true;
+      }
 
-        currentNode = currentNode.next;
+      currentNode = currentNode.next;
     }
 
     return false;
+  }
+  length() {
+    return this.size;
+  }
+  clear() {
+    for (let i = 0; i < this.buckets.length; i++) {
+        this.buckets[i] = null;
+    }
+
+    this.size = 0;
   }
 }
 
