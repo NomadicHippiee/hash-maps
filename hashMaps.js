@@ -200,5 +200,20 @@ class HashMap {
     }
     return valuesArray;
   }
+  entries() {
+    let entriesArray = [];
+
+    for (let i = 0; i < this.buckets.length; i++) {
+        let currentNode = this.buckets[i];
+
+        while (currentNode !== null) {
+            let entry = [currentNode.key, currentNode.value];
+            entriesArray.push(entry);
+
+            currentNode = currentNode.next;
+        }
+    }
+    return entriesArray;
+  }
 }
 
