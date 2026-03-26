@@ -68,9 +68,9 @@ class HashMap {
       currentNode = currentNode.next;
     }
 
-    // if (this.size > (this.capacity * this.loadFactor)) {
-    //     this.grow();
-    // }
+    if (this.size > (this.capacity * this.loadFactor)) {
+        this.grow();
+    }
   }
   get(key) {
     if (typeof key !== "string") {
@@ -214,6 +214,29 @@ class HashMap {
         }
     }
     return entriesArray;
+  }
+  grow() {
+    let oldBuckets = this.buckets;
+
+    this.capacity = this.capacity * 2;
+
+    this.buckets = [];
+
+    for (let i = 0; i < this.capacity; i++) {
+        this.buckets[i] = null; 
+    }
+
+    this.size = 0;
+
+    for(let i = 0; i < oldBuckets.length; i++) {
+        let currentNode = oldBuckets[i];
+
+        while (currentNode !== null) {
+            this.set(currentNode.key, currentNode.value);
+
+            currentNode = currentNode.next;
+        }
+    }
   }
 }
 
